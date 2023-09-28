@@ -14,28 +14,39 @@ class Person {
   template: `
     <h1>Mapping Observables</h1>
 
-    <p>This was added on my own machine, does it appear online</p>
+    <section id="mapping-array">
+      <h2>Array destructuring</h2>
+      
+      <div class="imperative">
+        <h3>For loop that gets the unmapped first and last name</h3>
+        <ng-container *ngFor="let person of people$ | async">
+          <p>{{person.firstName}} {{person.lastName}}</p>
+        </ng-container>
+      </div>
 
-    <h2>Mapping to destructure</h2>
-    
-    <h3>For loop that gets the unmapped first and last name</h3>
-    <ng-container *ngFor="let person of people$ | async">
-      <p>{{person.firstName}} {{person.lastName}}</p>
-    </ng-container>
+      <div class="declarative">
+        <h3>For loop with mapped full name</h3>
+        <ng-container *ngFor="let person of peopleWithFullName$ | async">
+          <p>{{person.fullName}}</p>
+        </ng-container>
+      </div>
+    </section>
 
-    <h3>For loop with mapped full name</h3>
-    <ng-container *ngFor="let person of peopleWithFullName$ | async">
-      <p>{{person.fullName}}</p>
-    </ng-container>
+    <section id="mapping-object">
+      <h2>Single object into multiple sub properties</h2>
 
-    <h2>Single into multiple sub properties</h2>
-    <h3>Imperative</h3>
-    <p>{{isInstall}}</p>
-    <p>{{callback}}</p>
+      <div class="imperative">
+        <h3>Imperative</h3>
+        <p>{{isInstall}}</p>
+        <p>{{callback}}</p>
+      </div>
 
-    <h3>Declarative</h3>
-    <p>{{(paramValues$ | async)?.isInstall}}</p>
-    <p>{{(paramValues$ | async)?.callback}}</p>
+      <div class="declarative">
+        <h3>Declarative</h3>
+        <p>{{(paramValues$ | async)?.isInstall}}</p>
+        <p>{{(paramValues$ | async)?.callback}}</p>
+      </div>
+    </section>
   `,
   styleUrls: ['./map-observables.component.scss'],
 })
