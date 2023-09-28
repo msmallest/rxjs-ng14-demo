@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Observable, map, mergeMap, of, toArray } from 'rxjs';
+import { Component, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Observable, map, mergeMap, of, toArray } from "rxjs";
+import { ImperativeWrapperComponent } from "../shared/imperative-wrapper/imperative-wrapper.component";
+import { DeclarativeWrapperComponent } from "../shared/declarative-wrapper/declarative-wrapper.component";
 
 class Person {
   firstName: string;
@@ -8,53 +10,57 @@ class Person {
 }
 
 @Component({
-  selector: 'app-map-observables',
+  selector: "app-map-observables",
   standalone: true,
-  imports: [CommonModule],
   template: `
     <h1>Mapping Observables</h1>
 
     <section id="mapping-array">
       <h2>Array destructuring</h2>
-      
-      <div class="imperative">
+
+      <app-imperative-wrapper>
         <h3>For loop that gets the unmapped first and last name</h3>
         <ng-container *ngFor="let person of people$ | async">
-          <p>{{person.firstName}} {{person.lastName}}</p>
+          <p>{{ person.firstName }} {{ person.lastName }}</p>
         </ng-container>
-      </div>
+      </app-imperative-wrapper>
 
-      <div class="declarative">
+      <app-declarative-wrapper>
         <h3>For loop with mapped full name</h3>
         <ng-container *ngFor="let person of peopleWithFullName$ | async">
-          <p>{{person.fullName}}</p>
+          <p>{{ person.fullName }}</p>
         </ng-container>
-      </div>
+      </app-declarative-wrapper>
     </section>
 
     <section id="mapping-object">
       <h2>Single object into multiple sub properties</h2>
 
-      <div class="imperative">
-        <h3>Imperative</h3>
-        <p>{{isInstall}}</p>
-        <p>{{callback}}</p>
-      </div>
+      <app-imperative-wrapper>
+          <h3>Imperative</h3>
+          <p>{{ isInstall }}</p>
+          <p>{{ callback }}</p>
+      </app-imperative-wrapper>
 
-      <div class="declarative">
-        <h3>Declarative</h3>
-        <p>{{(paramValues$ | async)?.isInstall}}</p>
-        <p>{{(paramValues$ | async)?.callback}}</p>
-      </div>
+      <app-declarative-wrapper>
+          <h3>Declarative</h3>
+          <p>{{ (paramValues$ | async)?.isInstall }}</p>
+          <p>{{ (paramValues$ | async)?.callback }}</p>
+      </app-declarative-wrapper>
     </section>
   `,
-  styleUrls: ['./map-observables.component.scss'],
+  styleUrls: ["./map-observables.component.scss"],
+  imports: [
+    CommonModule,
+    ImperativeWrapperComponent,
+    DeclarativeWrapperComponent,
+  ],
 })
 export class MapObservablesComponent implements OnInit {
   // Array
   people$: Observable<Person[]> = of([
-    { firstName: 'Brian', lastName: 'Troncone' },
-    { firstName: 'Todd', lastName: 'Motto' },
+    { firstName: "Brian", lastName: "Troncone" },
+    { firstName: "Todd", lastName: "Motto" },
   ]);
 
   // comment to test adding something via stackblitz
@@ -73,7 +79,7 @@ export class MapObservablesComponent implements OnInit {
 
   // Single into multiple sub properties
 
-  params$ = of({ callback: 'callback' });
+  params$ = of({ callback: "callback" });
   isInstall: boolean;
   callback: string;
 
