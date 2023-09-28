@@ -14,9 +14,10 @@ class Person {
   template: `
     <h1>Mapping Observables</h1>
 
+    <p>This was added on my own machine, does it appear online</p>
+
     <h2>Mapping to destructure</h2>
     
-
     <h3>For loop that gets the unmapped first and last name</h3>
     <ng-container *ngFor="let person of people$ | async">
       <p>{{person.firstName}} {{person.lastName}}</p>
