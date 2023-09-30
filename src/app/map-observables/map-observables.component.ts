@@ -63,10 +63,8 @@ export class MapObservablesComponent implements OnInit {
     { firstName: "Todd", lastName: "Motto" },
   ]);
 
-  // comment to test adding something via stackblitz
-
   peopleWithFullName$ = this.people$.pipe(
-    mergeMap((data) => data),
+    mergeMap((persons) => persons),
     map((person) => {
       return {
         firstName: person.firstName,
