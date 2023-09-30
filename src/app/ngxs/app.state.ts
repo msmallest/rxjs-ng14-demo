@@ -10,10 +10,10 @@ export class UpdateThose {
     constructor(public those: string[]) {}
 }
 
-class Thing {
+export class Thing {
     stuff: string;
 }
-class StateModel {
+export class StateModel {
     thing: Thing;
     those: string[];
 }

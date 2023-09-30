@@ -15,6 +15,7 @@ import { NgxsStoragePluginModule, StorageOption } from '@ngxs/storage-plugin';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 
 import { getActionTypeFromInstance } from '@ngxs/store';
+import { StoreRetreivalComponent } from './store-retreival/store-retreival.component';
 
 export class Clear {
   static readonly type = '[App] Clear';
@@ -39,6 +40,7 @@ export function sessionClearPlugin(state: any, action: any, next: any) {
     MaterialExampleModule,
     ReactiveFormsModule,
     MapObservablesComponent,
+    StoreRetreivalComponent,
     NgxsModule.forRoot([ApplState], {
       developmentMode: !environment.production
     }),
